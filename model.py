@@ -21,12 +21,12 @@ class Brand(db.Model):
     name = db.Column(db.String(50), nullable=False)
     founded = db.Column(db.Integer)
     headquarters = db.Column(db.String(50))
-    discontinued = db.Column(db.Interger)
+    discontinued = db.Column(db.Integer)
 
     def __repr__(self):
         """Prettify info about brands"""
 
-        return "<brand_id=%s name=%s founded=%d headquarters=%s discontinued=%d>" % (
+        return "<brand_id={} name={} founded={} headquarters={} discontinued={}>".format(
             self.brand_id, self.name, self.founded, self.headquarters, self.discontinued)
 
 
@@ -35,9 +35,9 @@ class Model(db.Model):
 
     __tablename__ = "models"
 
-    model_id = db.Column(db.Interger, primary_key=True, autoincrement=True,
+    model_id = db.Column(db.Integer, primary_key=True, autoincrement=True,
                          nullable=False)
-    year = db.Column(db.Interger, nullable=False)
+    year = db.Column(db.Integer, nullable=False)
     brand_id = db.Column(db.String(5), nullable=False)
     name = db.Column(db.String(50), nullable=False)
 
