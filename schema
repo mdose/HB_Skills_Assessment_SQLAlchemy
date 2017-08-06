@@ -1,0 +1,52 @@
+cars=# \d
+                 List of relations
+ Schema |        Name         |   Type   |  Owner
+--------+---------------------+----------+---------
+ public | awards              | table    | vagrant
+ public | awards_award_id_seq | sequence | vagrant
+ public | brands              | table    | vagrant
+ public | models              | table    | vagrant
+ public | models_model_id_seq | sequence | vagrant
+(5 rows)
+
+cars=# \d awards
+                                     Table "public.awards"
+  Column   |         Type          |                         Modifiers
+-----------+-----------------------+-----------------------------------------------------------
+ award_id  | integer               | not null default nextval('awards_award_id_seq'::regclass)
+ year      | integer               | not null
+ winner_id | integer               |
+ name      | character varying(50) | not null
+Indexes:
+    "awards_pkey" PRIMARY KEY, btree (award_id)
+Foreign-key constraints:
+    "awards_winner_id_fkey" FOREIGN KEY (winner_id) REFERENCES models(model_id)
+
+cars=# \d brands
+              Table "public.brands"
+    Column    |         Type          | Modifiers
+--------------+-----------------------+-----------
+ brand_id     | character varying(5)  | not null
+ name         | character varying(50) | not null
+ founded      | integer               |
+ headquarters | character varying(50) |
+ discontinued | integer               |
+Indexes:
+    "brands_pkey" PRIMARY KEY, btree (brand_id)
+Referenced by:
+    TABLE "models" CONSTRAINT "models_brand_id_fkey" FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
+
+cars=# \d models
+                                    Table "public.models"
+  Column  |         Type          |                         Modifiers
+----------+-----------------------+-----------------------------------------------------------
+ model_id | integer               | not null default nextval('models_model_id_seq'::regclass)
+ year     | integer               | not null
+ brand_id | character varying(5)  | not null
+ name     | character varying(50) | not null
+Indexes:
+    "models_pkey" PRIMARY KEY, btree (model_id)
+Foreign-key constraints:
+    "models_brand_id_fkey" FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
+Referenced by:
+    TABLE "awards" CONSTRAINT "awards_winner_id_fkey" FOREIGN KEY (winner_id) REFERENCES models(model_id)

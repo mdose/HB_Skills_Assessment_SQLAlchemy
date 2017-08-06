@@ -17,7 +17,17 @@ class Brand(db.Model):
 
     __tablename__ = "brands"
 
-    pass
+    brand_id = db.Column(db.String(5), primary_key=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    founded = db.Column(db.Integer)
+    headquarters = db.Column(db.String(50))
+    discontinued = db.Column(db.Interger)
+
+    def __repr__(self):
+        """Prettify info about brands"""
+
+        return "<brand_id=%s name=%s founded=%d headquarters=%s discontinued=%d>" % (
+            self.brand_id, self.name, self.founded, self.headquarters, self.discontinued)
 
 
 class Model(db.Model):
@@ -25,8 +35,17 @@ class Model(db.Model):
 
     __tablename__ = "models"
 
-    pass
+    model_id = db.Column(db.Interger, primary_key=True, autoincrement=True,
+                         nullable=False)
+    year = db.Column(db.Interger, nullable=False)
+    brand_id = db.Column(db.String(5), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
 
+    def __repr__(self):
+        """Prettify info about modelss"""
+
+        return "<model_id=%d year=%d brand_id=%s name=%s>" % (
+            self.model_id, self.year, self.brand_id, self.name)
 # End Part 1
 
 
