@@ -29,6 +29,8 @@ class Brand(db.Model):
         return "<brand_id={} name={} founded={} headquarters={} discontinued={}>".format(
             self.brand_id, self.name, self.founded, self.headquarters, self.discontinued)
 
+###Do Database relationships/Normalization!!!!!!!!!!!!!!!!!!!!!!!!!
+### I forgot to do that earlier!!!
 
 class Model(db.Model):
     """Car model."""
